@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mumbai DP 2034 Explorer</title>
+  <link rel="stylesheet" href="vendor/maplibre-gl.css" />
+  <link rel="stylesheet" href="style.css" />
+  <script>if (innerWidth < 860) document.documentElement.classList.add("panel-closed");</script>
+</head>
+<body>
+  <div id="map"></div>
+
+  <header id="topbar">
+    <button id="panelToggle" class="icon-btn" title="Layers" aria-label="Toggle layers panel">☰</button>
+    <div class="brand">
+      <div class="logo">DP</div>
+      <div>
+        <h1>Mumbai DP 2034 Explorer</h1>
+        <p>Development Plan 2034 · Municipal Corporation of Greater Mumbai</p>
+      </div>
+    </div>
+    <div class="search">
+      <input id="searchInput" type="search" autocomplete="off" spellcheck="false"
+             placeholder="Search CTS / CS no., village or ward   ( / )" />
+      <div id="searchResults" role="listbox"></div>
+    </div>
+    <select id="wardJump" title="Go to ward"><option value="">Go to ward…</option></select>
+    <button id="aboutBtn" class="text-btn">About</button>
+  </header>
+
+  <aside id="panel">
+    <section>
+      <h2>Layers</h2>
+      <div id="layerGroups"></div>
+    </section>
+    <section>
+      <h2>Basemap</h2>
+      <div id="basemaps" class="seg"></div>
+      <label class="slider">Plan opacity
+        <input id="opacity" type="range" min="0.15" max="1" step="0.05" value="0.85" />
+      </label>
+    </section>
+    <section>
+      <h2>Legend</h2>
+      <div id="legend"></div>
+    </section>
+  </aside>
+
+  <aside id="report" class="hidden" aria-live="polite">
+    <div class="report-head">
+      <div>
+        <h2>Location report</h2>
+        <p id="reportCoords"></p>
+      </div>
+      <button id="reportClose" class="icon-btn" title="Close (Esc)" aria-label="Close report">×</button>
+    </div>
+    <div id="reportBody"></div>
+  </aside>
+
+  <div id="hint">Click anywhere on the map for the DP report at that spot</div>
+  <div id="status"></div>
+
+  <div id="aboutModal" class="modal hidden">
+    <div class="modal-card">
+      <button id="aboutClose" class="icon-btn modal-x" aria-label="Close">×</button>
+      <h2>Mumbai DP 2034 Explorer</h2>
+      <p>An interactive map of the <b>Development Plan 2034</b> of the Municipal Corporation
+        of Greater Mumbai, built from the city's public GIS service.</p>
+      <ul>
+        <li><b>Click any spot</b> for a location report: the property parcel (CTS/CS number,
+          village, area, DP remarks) together with its land-use zone, reservations,
+          designations, road proposals, CRZ category, heritage listing, ward and village.</li>
+        <li><b>Search</b> a CTS/CS number, village or ward to fly to a plot.</li>
+        <li><b>Toggle layers</b> and switch basemaps from the left panel. The map position is
+          kept in the address bar, so a URL reopens the same view.</li>
+      </ul>
+      <div id="aboutStats"></div>
+      <p class="fine">Plan data © MCGM (agsmaps1.mcgm.gov.in, dpremarks.mcgm.gov.in).
+        Basemaps and imagery © Esri and its data providers. For reference and research;
+        consult MCGM for official DP remarks.</p>
+    </div>
+  </div>
+
+  <script src="vendor/maplibre-gl.js"></script>
+  <script src="vendor/pmtiles.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
